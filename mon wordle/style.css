@@ -1,0 +1,177 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #c4dbe4;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  text-shadow: 4px 1px 2px rgb(0, 0, 0);
+  text-decoration: underline black;
+  margin: 40px;
+  font-size: 40px;
+}
+
+.row {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.letter {
+  border-color: rgba(26, 25, 25, 0.26);
+  border-style: solid;
+  width: 60px;
+  height: 60px;
+  box-shadow: 4px 1px 2px rgba(0, 0, 0, 0.459);
+  margin: 10px;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 30px;
+}
+
+.correct {
+  background-color: darkgreen;
+  color: white;
+}
+
+.close {
+  background-color: goldenrod;
+  color: white;
+}
+
+.wrong {
+  background-color: #888;
+  color: white;
+}
+.hidden {
+  visibility: hidden;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px
+}
+
+.invalid {
+  background-color: black;
+  color: red;
+}
+
+.row {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.row.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.title {
+  transition: opacity 0.5s ease;
+}
+
+@keyframes rainbow {
+  100%,
+  0% {
+    color: rgb(255, 0, 0);
+  }
+  8% {
+    color: rgb(255, 127, 0);
+  }
+  16% {
+    color: rgb(255, 255, 0);
+  }
+  25% {
+    color: rgb(127, 255, 0);
+  }
+  33% {
+    color: rgb(0, 255, 0);
+  }
+  41% {
+    color: rgb(0, 255, 127);
+  }
+  50% {
+    color: rgb(0, 255, 255);
+  }
+  58% {
+    color: rgb(0, 127, 255);
+  }
+  66% {
+    color: rgb(0, 0, 255);
+  }
+  75% {
+    color: rgb(127, 0, 255);
+  }
+  83% {
+    color: rgb(255, 0, 255);
+  }
+  91% {
+    color: rgb(255, 0, 127);
+  }
+}
+
+.winner {
+  animation: rainbow 4s infinite linear;
+}
+
+
+@keyframes altRainbow {
+  100%,
+  0% {
+    background: rgb(255, 0, 0);
+  }
+  8% {
+    background: rgb(255, 127, 0);
+  }
+  16% {
+    background: rgb(255, 255, 0);
+  }
+  25% {
+    background: rgb(127, 255, 0);
+  }
+  33% {
+    background: rgb(0, 255, 0);
+  }
+  41% {
+    background: rgb(0, 255, 127);
+  }
+  50% {
+    background: rgb(0, 255, 255);
+  }
+  58% {
+    background: rgb(0, 127, 255);
+  }
+  66% {
+    background: rgb(0, 0, 255);
+  }
+  75% {
+    background: rgb(127, 0, 255);
+  }
+  83% {
+    background: rgb(255, 0, 255);
+  }
+  91% {
+    background: rgb(255, 0, 127);
+  }
+}
+
+.row.winner .letter{
+  animation: altRainbow 4s infinite linear;
+  background: currentColor;
+  color: white;
+}
