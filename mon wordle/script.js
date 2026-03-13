@@ -202,7 +202,6 @@ function handleKeyPress(event) {
   }
   // listens for any key press
   const action = event.key; // which key was pressed
-  console.log(action); // debug: print key to console
   switch (
     action // handle special keys using switch
   ) {
