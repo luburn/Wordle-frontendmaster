@@ -6,8 +6,8 @@ const loadingDiv = document.querySelector(".loading");
 
 //gamestate
 
-let gameRow = 1; // keeps track of which row of the game we are currently typing in
-let answerWordle = ""; // API endpoint to get the word of the day
+let gameRow = 1;
+let answerWordle = "";
 let currentGuess = "";
 let done = false;
 let isLoading = false;
@@ -19,7 +19,6 @@ loseSound.volume = 0.4;
 //DOM
 
 function getCurrentRow() {
-  // returns the DOM element of the current row based on gameRow
   return document.querySelector(`.row[data-row="${gameRow}"]`); // finds the element with class "row" and matching data-row attribute
 }
 
@@ -53,32 +52,32 @@ function setLoading(isLoading) {
 }
 
 function nextRow() {
-  // moves the game to the next row
-  gameRow++; // increment row counter
+
+  gameRow++;
 }
 
 function addLetter(letter) {
-  // adds a letter to the guess and updates the UI
-  const letters = getLetters(); // get the letters for the current row
+  
+  const letters = getLetters(); 
   if (currentGuess.length < letters.length) {
-    // if the word isn't full yet //can be used incase of less or more letter for wordle
+    
 
-    currentGuess += letter; // add the letter to the guess string
+    currentGuess += letter; 
   } else {
-    currentGuess = currentGuess.slice(0, -1) + letter; // if full, replace the last letter with the new one
+    currentGuess = currentGuess.slice(0, -1) + letter;
   }
 
-  letters[currentGuess.length - 1].innerText = letter; // update the corresponding box in the row
+  letters[currentGuess.length - 1].innerText = letter;
 }
 
 function backspace() {
-  // removes the last typed letter
-  const letters = getLetters(); // get letters of current row
 
-  if (currentGuess.length === 0) return; // if no letters typed, do nothing
+  const letters = getLetters();
 
-  currentGuess = currentGuess.substring(0, currentGuess.length - 1); // remove the last character from the guess
-  letters[currentGuess.length].innerText = ""; // clear the corresponding tile in the UI
+  if (currentGuess.length === 0) return;
+
+  currentGuess = currentGuess.substring(0, currentGuess.length - 1); 
+  letters[currentGuess.length].innerText = "";
 }
 
 //guess validation
@@ -97,8 +96,7 @@ async function commit() {
   });
 
   const resObj = await res.json();
-  const validWord = resObj.validWord;
-  //const { validWord } = resObj;
+  const { validWord } = resObj;
 
   isLoading = false;
   setLoading(false);
@@ -131,7 +129,7 @@ async function commit() {
     }
   }
   if (currentGuess === answerWordle) {
-    showWinner(gameRow);
+    showWinner();
     document.querySelector(".title").classList.add("winner");
     getCurrentRow().classList.add("winner");
     winSound.play();
@@ -140,9 +138,8 @@ async function commit() {
   }
 
   if (gameRow === 6) {
-    showLoser(gameRow); //cant do cool stuff. need to keep the attempts so just add the z axis and a sad pic
+    showLoser();
     document.querySelector(".title").classList.add("loser");
-    getCurrentRow().classList.add("loser");
     loseSound.play();
     done = true;
   }
@@ -150,7 +147,6 @@ async function commit() {
   nextRow();
   currentGuess = "";
   function markInvalidWord() {
-    // alert("not a valid word");
     for (let i = 0; i < letters.length; i++) {
       letters[i].classList.add("invalid");
 
@@ -197,21 +193,20 @@ function animateTitle(element, newText) {
 
 function handleKeyPress(event) {
   if (done || isLoading) {
-    //do nothing
     return;
   }
-  // listens for any key press
-  const action = event.key; // which key was pressed
+
+  const action = event.key;
   switch (
-    action // handle special keys using switch
+    action
   ) {
-    case "Enter": // when Enter is pressed
-      commit(); // submit guess
+    case "Enter":
+      commit();
       break;
-    case "Backspace": // when Backspace is pressed
-      backspace(); // remove letter
+    case "Backspace":
+      backspace(); 
       break;
-    default: // any other key
+    default:
       if (isLetter(action)) {
         addLetter(action.toUpperCase());
       }
@@ -230,4 +225,4 @@ async function init() {
   document.addEventListener("keydown", handleKeyPress);
 }
 
-init(); // start the game
+init();
